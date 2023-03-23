@@ -18,8 +18,9 @@ function App() {
   }
 
   async function getModels() {
-    const response = await fetch('http://localhost:7653/models');
-    const models = await response.json();
+    //const response = await fetch('http://localhost:7653/models');
+    //const models = await response.json();
+    const models = [{ id: 'hi' }];
     console.log('models', models);
     setModel(models);
     console.log('get models', models);
