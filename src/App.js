@@ -38,17 +38,18 @@ function App() {
     //fetch request to api then combining the chat log array of messages and sending it as a message
 
     try {
-      const response = await fetch('http://localhost:7653/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          message: messages,
-          currentModel: currentModel,
-        }),
-      });
-      const data = await response.json();
+      //   const response = await fetch('http://localhost:7653/', {
+      //     method: 'POST',
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //     },
+      //     body: JSON.stringify({
+      //       message: messages,
+      //       currentModel: currentModel,
+      //     }),
+      //   });
+      //   const data = await response.json();
+      const data = { message: 'hello' };
       console.log('data recieved on front end', data);
       setChatLog([...chatLogNew, { user: 'gpt', message: `${data.message}` }]);
       console.log('data received after post request', data.message);
