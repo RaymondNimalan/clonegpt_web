@@ -18,12 +18,15 @@ function App() {
   }
 
   async function getModels() {
-    //const response = await fetch('http://localhost:7653/models');
-    //const models = await response.json();
-    const models = [{ id: 'hi' }];
-    console.log('models', models);
-    setModel(models);
-    console.log('get models', models);
+    try {
+      const response = await fetch('https://api-clonegpt.onrender.com/models');
+      const models = await response.json();
+      console.log('models', models);
+      setModel(models);
+      console.log('get models', models);
+    } catch (error) {
+      console.log('error from getModels function', error);
+    }
   }
 
   async function handleSubmit(e) {
@@ -38,18 +41,17 @@ function App() {
     //fetch request to api then combining the chat log array of messages and sending it as a message
 
     try {
-      //   const response = await fetch('http://localhost:7653/', {
-      //     method: 'POST',
-      //     headers: {
-      //       'Content-Type': 'application/json',
-      //     },
-      //     body: JSON.stringify({
-      //       message: messages,
-      //       currentModel: currentModel,
-      //     }),
-      //   });
-      //   const data = await response.json();
-      const data = { message: 'hello' };
+      const response = await fetch('https://api-clonegpt.onrender.com/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: messages,
+          currentModel: currentModel,
+        }),
+      });
+      const data = await response.json();
       console.log('data recieved on front end', data);
       setChatLog([...chatLogNew, { user: 'gpt', message: `${data.message}` }]);
       console.log('data received after post request', data.message);
